@@ -53,6 +53,7 @@
     <Compile Include="Managers\MarketGeneratorManagerGeneric.cs" />
     <Compile Include="Managers\MarketManager.cs" />
     <Compile Include="Managers\MarketManagerJS.cs" />
+    <Compile Include="Managers\MarketManagerSelector.cs" />
     <Compile Include="Managers\ProbabilityAssigner.cs" />
     <Compile Include="Managers\ProbabilityModifier.cs" />
     <Compile Include="Requests\MarketRequest.cs" />

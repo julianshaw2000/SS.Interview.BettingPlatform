@@ -2,6 +2,7 @@
 {
     public enum SportType
     {
-        Football, Tennis, Hockey, Cricket, Not_Defined
+        Football, Tennis, Hockey, Cricket, Not_Defined,
+        Rugby
     }
 }
