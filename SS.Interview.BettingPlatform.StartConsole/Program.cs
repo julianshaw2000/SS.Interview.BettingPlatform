@@ -1,16 +1,51 @@
-﻿using SS.Interview.BettingPlatform.Managers;
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using SS.Interview.BettingPlatform.MarketGeneration.Models;
 using SS.Interview.BettingPlatform.Requests;
+using SS.Interview.BettingPlatform.Managers;
 
+var factory = new ConnectionFactory() { HostName = "localhost" };
 
-Console.WriteLine("Select Game (f=footbal, t=tennis) or x to exit");
+using var connection = factory.CreateConnection();
+using var channel = connection.CreateModel();
 
-var answer = "";
+Console.WriteLine("Consumer started");
+
+List<ProbRecord> probRecords = new List<ProbRecord>();
+
 var marketManager = new MarketManagerSelector();
 var markets = new List<Market>();
 
+channel.QueueDeclare(queue: "letterbox", durable: false, exclusive: false, autoDelete: false, arguments: null);
+
+var consumer = new EventingBasicConsumer(channel);
+consumer.Received += (model, ea) =>
+{
+    var body = ea.Body.ToArray();
+    var message = Encoding.UTF8.GetString(body);
+
+
+    probRecords = System.Text.Json.JsonSerializer.Deserialize<List<ProbRecord>>(message);
+
+    foreach (var item in probRecords)
+    {
+        Console.WriteLine("{0} {1} {2}", item.Name, item.Prob, item.UpdateTime);
+    }
+
+    Console.WriteLine(" Received message: {0}", message);
+};
+
+channel.BasicConsume(queue: "letterbox", autoAck: true, consumer: consumer);
+
+
+var answer = "f";
+
 do
 {
+    Console.WriteLine("Select Game (f=footbal, t=tenis) or x to exit");
 
     answer = Console.ReadLine();
     if (answer.ToUpper() != "X")
@@ -22,6 +57,7 @@ do
 while (answer.ToUpper() != "X");
 
 
+ 
 
 // =================  DoGame  ===============
 List<Market> DoGame(string answer)
@@ -52,12 +88,18 @@ List<Market> DoGame(string answer)
 
     if (sport != SportType.Not_Defined)
     {
-        var marketRequest = new MarketRequest() { Sport = sport, Fixture = fixture };
-        markets = marketManager.Get(marketRequest).ToList();
+         
+            var marketRequest = new MarketRequest() { Sport = sport, Fixture = fixture };
+            markets = marketManager.Get(marketRequest).ToList(); 
+
+         
+
     }
 
     return markets;
 }
+
+
 
 // ========== Write Game  ==============
 
@@ -74,4 +116,13 @@ void WriteGame(List<Market> marketRequest)
             Console.WriteLine($" : {selection.Probability}");
         }
     }
+}
+
+
+
+public class ProbRecord
+{
+    public string Name { get; set; }
+    public double Prob { get; set; }
+    public DateTime UpdateTime { get; set; }
 }

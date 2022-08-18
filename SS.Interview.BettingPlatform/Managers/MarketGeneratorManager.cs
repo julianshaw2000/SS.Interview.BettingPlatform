@@ -8,108 +8,71 @@ namespace SS.Interview.BettingPlatform.Managers
 {
 
 
-    public class FootballMarketGeneratorManager : FootballMarketGenerator, IGameMarketGenerator
+    public class FootballMarketGeneratorManager : FootballMarketGenerator, IGameMarketGenerator  
     {
 
         // ============  F O O T B A L L ============
-        public FootballMarketGeneratorManager(): base()
+        public FootballMarketGeneratorManager() : base()
         {
 
         }
 
-        public IEnumerable<Market> GetMarkets(string fixture, double dynamicPercentage)
-        {
-            var probabilityChange = dynamicPercentage;
-
-
-            var results =  base.GetMarkets(fixture);
-
-            var amendedResults = AmendPercentage(probabilityChange, results);
-
-            return amendedResults;
-             
-
-        }
-
-        public IEnumerable<Market> AmendPercentage( double dynamicPercentage, Market[] results)
-        {
-            var probabilityChange = dynamicPercentage;
-             
-            var probabilityAmendnender = new ProbabilityAssigner(probabilityChange, results);
-
-            return probabilityAmendnender.ProcessResultList();
-
-        }
-
-    }
-
-
-    // ========================  T E N N I S ====================
-    public class TennisMarketGeneratorManager : TennisMarketGenerator, IGameMarketGenerator
-    {
-        public TennisMarketGeneratorManager() : base()
-        {
-
-        }
-
-        public IEnumerable<Market> GetMarkets(string fixture, double dynamicPercentage)
-        {
-            var probabilityChange = dynamicPercentage;
-
-
-            var results = base.GetMarkets(fixture).ToArray();
-
-            var amendedResults = AmendPercentage(probabilityChange, results);
-
-            return amendedResults;
-
-
-        }
-
-        public IEnumerable<Market> AmendPercentage(double dynamicPercentage, Market[] results)
-        {
-            var probabilityChange = dynamicPercentage;
-
-            var probabilityAmendnender = new ProbabilityAssigner(probabilityChange, results);
-
-            return probabilityAmendnender.ProcessResultList();
-
-        }
-
-    }
-
-
-    // =======================  R U G B Y ============================
-    public class RugbyMarketGeneratorManager : RugbyMarketGenerator, IGameMarketGenerator
-    {
-        public RugbyMarketGeneratorManager() : base()
-        {
-
-        }
-
-        public IEnumerable<Market> GetMarkets(string fixture, double dynamicPercentage)
-        {
-            var probabilityChange = dynamicPercentage;
-
+        public IEnumerable<Market> GetMarkets(string fixture)
+        { 
 
             var results = base.GetMarkets(fixture);
+             
 
-            var amendedResults = AmendPercentage(probabilityChange, results);
-
-            return amendedResults;
-
+            return results;
 
         }
 
-        public IEnumerable<Market> AmendPercentage(double dynamicPercentage, Market[] results)
+       
+
+
+        // ========================  T E N N I S ====================
+        public class TennisMarketGeneratorManager : TennisMarketGenerator, IGameMarketGenerator //, IPercentageModifierManage
         {
-            var probabilityChange = dynamicPercentage;
+            public TennisMarketGeneratorManager() : base()
+            {
 
-            var probabilityAmendnender = new ProbabilityAssigner(probabilityChange, results);
+            }
 
-            return probabilityAmendnender.ProcessResultList();
+            public IEnumerable<Market> GetMarkets(string fixture)
+            { 
+
+
+                var results = base.GetMarkets(fixture).ToArray(); 
+
+                return results;
+
+
+            } 
 
         }
 
+
+        // =======================  R U G B Y ============================
+        public class RugbyMarketGeneratorManager : RugbyMarketGenerator, IGameMarketGenerator
+        {
+            public RugbyMarketGeneratorManager() : base()
+            {
+
+            }
+
+            public IEnumerable<Market> GetMarkets(string fixture)
+            {
+                
+
+                var results = base.GetMarkets(fixture);
+                 
+
+                return results;
+
+
+            }
+             
+
+        }
     }
 }

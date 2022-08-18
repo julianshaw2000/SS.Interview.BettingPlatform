@@ -9,23 +9,20 @@ using System.Threading.Tasks;
 namespace SS.Interview.BettingPlatform.Managers
 {
     public class MarketManagerJS
-    {
-
-        private readonly IGameMarketGenerator _gameMarketGenerator;
+    { 
+        private readonly IGameMarketGenerator _gameMarketGenerator; 
 
         public MarketManagerJS(IGameMarketGenerator gameMarketGenerator )
-        {
-            _gameMarketGenerator = gameMarketGenerator;
+        {      
+            _gameMarketGenerator = gameMarketGenerator;             
         }
 
         public Market[] GetMarkets(string fix)
         {
-           return  _gameMarketGenerator.GetMarkets(fix).ToArray(); 
+            var result = _gameMarketGenerator.GetMarkets(fix).ToArray();
+            return result; 
         }
-
-        public Market[] AmendPercentage(double dynamicPercentage, Market[] marketResults)
-        {
-            return _gameMarketGenerator.AmendPercentage(dynamicPercentage, marketResults).ToArray();
-        }
+         
+         
     }
 }

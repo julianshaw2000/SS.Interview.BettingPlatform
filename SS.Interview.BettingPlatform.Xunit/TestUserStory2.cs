@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static SS.Interview.BettingPlatform.Managers.FootballMarketGeneratorManager;
 
 namespace SS.Interview.BettingPlatform.Xunit
 {
@@ -39,12 +40,12 @@ namespace SS.Interview.BettingPlatform.Xunit
 
         [Fact]
         public void ValidateSportRepositoryGetMarkets()
-        {
+        {             
 
             _gameMarketGeneratorMoq = new Mock<IGameMarketGenerator>();
 
             _gameMarketGeneratorMoq
-                .Setup(x => x.GetMarkets(It.IsAny<string>(), 0))
+                .Setup(x => x.GetMarkets(It.IsAny<string>()))
                 .Returns(_marketResults);
 
             var marketManager = new MarketManagerJS(_gameMarketGeneratorMoq.Object);
@@ -58,7 +59,7 @@ namespace SS.Interview.BettingPlatform.Xunit
 
         [Fact]
         public void AddSportRepositoryFootball()
-        {
+        { 
 
             var marketManager = new MarketManagerJS(new FootballMarketGeneratorManager());
 
@@ -75,7 +76,7 @@ namespace SS.Interview.BettingPlatform.Xunit
 
         [Fact]
         public void AddSportRepositoryRugby()
-        {
+        { 
 
             var marketManager = new MarketManagerJS(new RugbyMarketGeneratorManager());
             var fixture = "Hull vs Leeds";
@@ -89,7 +90,7 @@ namespace SS.Interview.BettingPlatform.Xunit
         [Fact]
         public void AddSportRepositoryTennis()
         {
-
+             
             var marketManager = new MarketManagerJS(new TennisMarketGeneratorManager());
             var fixture = "Nadal vs Murray";
 

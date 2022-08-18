@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SS.Interview.BettingPlatform.Interfaces;
 using SS.Interview.BettingPlatform.MarketGeneration.Generators;
 using SS.Interview.BettingPlatform.MarketGeneration.Models;
 using SS.Interview.BettingPlatform.Requests;
-
+using static SS.Interview.BettingPlatform.Managers.FootballMarketGeneratorManager;
 
 namespace SS.Interview.BettingPlatform.Managers
 {
     public class MarketManagerSelector
     {
-
-        MarketManagerJS MarketManagerJS;
+         
         public Market[] Get(MarketRequest request)
-        {
-
-            Market[] marketResults = new Market[] { };
+        { 
+            var percentageModifierManager = new PercentageModifierManager();
+            Market[] marketResults = new Market[] { }; 
 
             switch (request.Sport)
             {
-                case SportType.Football:
+                case SportType.Football:                     
 
-                    var marketManagerFootball = new MarketManagerJS(new FootballMarketGeneratorManager());
-                    marketResults  = marketManagerFootball.AmendPercentage(2, marketManagerFootball.GetMarkets(request.Fixture));
+                    marketResults = CalculateResults(request, percentageModifierManager, new FootballMarketGeneratorManager(), 2);
                     break;
 
                 case SportType.Tennis:
 
-                    var marketManagerTennis = new MarketManagerJS(new TennisMarketGeneratorManager());
-                    marketResults = marketManagerTennis.AmendPercentage(2, marketManagerTennis.GetMarkets(request.Fixture));
+                    marketResults = CalculateResults(request, percentageModifierManager, new TennisMarketGeneratorManager(), -3);
                     break;
 
                 case SportType.Rugby:
 
-                    var marketManagerRugby = new MarketManagerJS(new RugbyMarketGeneratorManager());
-                    marketResults = marketManagerRugby.AmendPercentage(2, marketManagerRugby.GetMarkets(request.Fixture));
+                    marketResults = CalculateResults(request, percentageModifierManager, new RugbyMarketGeneratorManager(), 0);
+
                     break;
                      
                 case SportType.Not_Defined:
@@ -43,6 +41,22 @@ namespace SS.Interview.BettingPlatform.Managers
                     break;
 
             }
+
+            return marketResults;
+        }
+
+        private static Market[] CalculateResults(MarketRequest request, 
+            PercentageModifierManager percentageModifierManager, 
+            IGameMarketGenerator gameGenerator, 
+            int gameProbabilityChange)
+        {
+            Market[] marketResults;
+            var marketManager = new MarketManagerJS(gameGenerator);
+           // var gameType = gameGenerator.GetType().ToString();
+
+            percentageModifierManager.ProbabilityDictionaryAdder( request.Sport,  gameProbabilityChange);
+            marketResults = marketManager.GetMarkets(request.Fixture);
+            marketResults = percentageModifierManager.UpdateProbability(request.Sport, marketResults);
 
             return marketResults;
         }

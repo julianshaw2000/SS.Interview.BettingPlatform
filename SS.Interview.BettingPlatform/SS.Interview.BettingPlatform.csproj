@@ -49,16 +49,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IGameMarketGenerator.cs" />
+    <Compile Include="Interfaces\IPercentageModifierManager.cs" />
+    <Compile Include="Managers\IPercentageModifierManage.cs" />
+    <Compile Include="Models\PercentageDictStorer.cs" />
     <Compile Include="Managers\MarketGeneratorManager.cs" />
     <Compile Include="Managers\MarketGeneratorManagerGeneric.cs" />
     <Compile Include="Managers\MarketManager.cs" />
     <Compile Include="Managers\MarketManagerJS.cs" />
     <Compile Include="Managers\MarketManagerSelector.cs" />
+    <Compile Include="Managers\PercentageModifierManager.cs" />
     <Compile Include="Managers\ProbabilityAssigner.cs" />
     <Compile Include="Managers\ProbabilityModifier.cs" />
+    <Compile Include="Models\SportProbabilityBase.cs" />
+    <Compile Include="Models\SportProbabilityBookerRecord.cs" />
+    <Compile Include="Models\SportProbabilityRecord.cs" />
+    <Compile Include="Models\ProbRecord.cs" />
     <Compile Include="Requests\MarketRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\SportType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,7 +4,7 @@ using SS.Interview.BettingPlatform.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using SS.Interview.BettingPlatform.Requests;
 
 namespace SS.Interview.BettingPlatform.Xunit;
 
@@ -30,20 +30,38 @@ public class TestUserStory4
 
     }
 
-    [Theory]
+    [Theory(Skip="Rubish")]
     [InlineData(10, 110)]
     [InlineData(0, 100)]
     [InlineData(-10, 90)]
-    public void AllowingPercentagesDynamicallyChange(double ammendPercentage,   double resultPercentage)
+    public void AllowingPercentagesDynamicallyChangeRubish(double ammendPercentage,   double resultPercentage)
     {
+        PercentageDictStorer.ProbDict_Add(SportType.Tennis, 10);
+        PercentageDictStorer.ProbDict_Add(SportType.Football, 20);
 
-        var marketManager = new MarketManagerJS(new FootballMarketGeneratorManager()); 
-         
-        var testResults = marketManager.AmendPercentage(ammendPercentage, _marketResults);
+
+        var percentageModifierManager = new PercentageModifierManager(); 
+
+        var marketManager = new MarketManagerJS(new FootballMarketGeneratorManager());
+        var testResults = marketManager.GetMarkets("audi");
 
         Assert.Equal(resultPercentage,(int) testResults[0].Selections[0].Probability); 
 
     }
+
+    [Theory]
+    [InlineData(SportType.Football, 10, 10)]
+    [InlineData( SportType.Tennis, 0, 0)] 
+    public void AllowingPercentagesDynamicallyChange(SportType sportType, double ammendPercentage, double resultPercentage)
+    {
+        PercentageDictStorer.ProbDict_Add( sportType, ammendPercentage);
+
+        var percentDictValue = PercentageDictStorer.ProbDict[sportType];
+
+        Assert.Equal(percentDictValue, resultPercentage);
+
+    }
+
 
 
 

@@ -5,9 +5,15 @@ namespace SS.Interview.BettingPlatform.Interfaces
 {
     public interface IGameMarketGenerator
     {
-        IEnumerable<Market> GetMarkets(string fixture, double dynamicPercentage=0);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fixture"></param>
+        /// <param name="dynamicPercentage"></param>
+        /// <returns></returns>
+        IEnumerable<Market> GetMarkets(string fixture);
 
-        IEnumerable<Market> AmendPercentage(double dynamicPercentage, Market[] results);
+     //   IEnumerable<Market> AmendPercentage(double dynamicPercentage, Market[] results);
 
     }
 }

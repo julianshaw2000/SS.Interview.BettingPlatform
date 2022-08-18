@@ -7,9 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS.Interview.BettingPlatfor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS.Interview.BettingPlatform.MarketGeneration", "External Libraries\SS.Interview.BettingPlatform.MarketGeneration\SS.Interview.BettingPlatform.MarketGeneration.csproj", "{B94E2941-812C-471B-8A35-C50F07AB67BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS.Interview.Runner", "SS.Interview.Runner\SS.Interview.Runner.csproj", "{8A2DFB20-3561-4B3C-B60A-593BCC27CEFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SS.Interview.Runner", "SS.Interview.Runner\SS.Interview.Runner.csproj", "{8A2DFB20-3561-4B3C-B60A-593BCC27CEFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS.Interview.BettingPlatform.Xunit", "SS.Interview.BettingPlatform.Xunit\SS.Interview.BettingPlatform.Xunit.csproj", "{676C1055-D2E1-4E22-BEF0-443F5A7E3599}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SS.Interview.BettingPlatform.Xunit", "SS.Interview.BettingPlatform.Xunit\SS.Interview.BettingPlatform.Xunit.csproj", "{676C1055-D2E1-4E22-BEF0-443F5A7E3599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS.Interview.BettingPlatform.ConsoleStart", "SS.Interview.BettingPlatform.StartConsole\SS.Interview.BettingPlatform.ConsoleStart.csproj", "{193B334A-9778-4F82-A7A7-59D6A681DB98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SS.Interview.BettingPlatform.ConsoleProbability", "SS.Interview.BettingPlatform.ConsoleProbability\SS.Interview.BettingPlatform.ConsoleProbability.csproj", "{7E9A9C16-F568-4653-8AF9-C870D5418AD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FDC00472-FA3D-47E6-8360-C2F29F2D535D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +42,14 @@ Global
 		{676C1055-D2E1-4E22-BEF0-443F5A7E3599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{676C1055-D2E1-4E22-BEF0-443F5A7E3599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{676C1055-D2E1-4E22-BEF0-443F5A7E3599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{193B334A-9778-4F82-A7A7-59D6A681DB98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{193B334A-9778-4F82-A7A7-59D6A681DB98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{193B334A-9778-4F82-A7A7-59D6A681DB98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{193B334A-9778-4F82-A7A7-59D6A681DB98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E9A9C16-F568-4653-8AF9-C870D5418AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E9A9C16-F568-4653-8AF9-C870D5418AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E9A9C16-F568-4653-8AF9-C870D5418AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E9A9C16-F568-4653-8AF9-C870D5418AD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
